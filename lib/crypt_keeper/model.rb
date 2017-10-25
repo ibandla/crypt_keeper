@@ -6,13 +6,13 @@ module CryptKeeper
     extend ActiveSupport::Concern
 
     # Public: Ensures that each field exist and is of type text. This prevents
+    # Not needed when using active admin
     # encrypted data from being truncated.
     def ensure_valid_field!(field)
       if self.class.columns_hash["#{field}"].nil?
         raise ArgumentError, "Column :#{field} does not exist"
-      elsif !%i(text binary).include?(self.class.columns_hash["#{field}"].type)
-        raise ArgumentError, "Column :#{field} must be of type 'text' or 'binary' \
-to be used for encryption"
+      # elsif !%i(text binary).include?(self.class.columns_hash["#{field}"].type)
+      #   raise ArgumentError, "Column :#{field} must be of type 'text' or 'binary' to be used for encryption"
       end
     end
 
